@@ -1,4 +1,4 @@
-import { beforeEach, expect, test } from 'vitest'
+import { beforeEach } from 'vitest';
 import type {TasksState} from '@/app/App'
 import {
   changeTaskStatusAC, changeTaskTitleAC,

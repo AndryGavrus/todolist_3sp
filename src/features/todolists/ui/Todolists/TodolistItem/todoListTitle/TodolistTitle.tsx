@@ -4,7 +4,7 @@ import {EditableSpan} from '@/common/components/EditableSpan/EditableSpan'
 import {changeTodolistTitleAC, deleteTodolistAC} from '@/features/todolists/model/todolists-reducer'
 import DeleteIcon from '@mui/icons-material/Delete'
 import IconButton from '@mui/material/IconButton'
-import styles from './TodolistItem.module.css'
+import styles from './TodolistTitle.module.css'
 
 type Props = {
   todolist: Todolist
