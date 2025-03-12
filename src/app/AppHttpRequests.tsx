@@ -1,21 +1,38 @@
+import {instance} from '@/common/instance/instance'
+import {todolistsApi} from '@/features/todolists/api/todolistsApi'
+import type {Todolist} from '@/features/todolists/api/todolistsApi.types'
 import {type ChangeEvent, type CSSProperties, useEffect, useState} from 'react'
 import Checkbox from '@mui/material/Checkbox'
-import {CreateItemForm} from '@/common/components/CreateItemForm/CreateItemForm'
-import {EditableSpan} from '@/common/components/EditableSpan/EditableSpan'
+import {CreateItemForm, EditableSpan} from '@/common/components'
 
 export const AppHttpRequests = () => {
-  const [todolists, setTodolists] = useState<any>([])
+  const [todolists, setTodolists] = useState<Todolist[]>([])
   const [tasks, setTasks] = useState<any>({})
 
   useEffect(() => {
-    // get todolists
+    todolistsApi.getTodolists().then((res) => {
+      setTodolists(res.data)
+    })
   }, [])
 
-  const createTodolist = (title: string) => {}
+  const createTodolist = (title: string) => {
+    instance.post<BaseResponse<{ item: Todolist }>>('/todo-lists', {title}).then((res) => {
+      const newTodolist = res.data.data.item
+      setTodolists([newTodolist, ...todolists])
+    })
+  }
 
-  const deleteTodolist = (id: string) => {}
+  const deleteTodolist = (id: string) => {
+    instance.delete<BaseResponse>(`/todo-lists/${id}`).then(() => {
+      setTodolists(todolists.filter(todolist => todolist.id !== id))
+    })
+  }
 
-  const changeTodolistTitle = (id: string, title: string) => {}
+  const changeTodolistTitle = (id: string, title: string) => {
+    todolistsApi.changeTodolistTitle(id, title).then(() => {
+      setTodolists(todolists.map(todolist => todolist.id === id ? {...todolist, title} : todolist))
+    })
+  }
 
   const createTask = (todolistId: string, title: string) => {}
 
@@ -28,7 +45,7 @@ export const AppHttpRequests = () => {
   return (
       <div style={{margin: '20px'}}>
         <CreateItemForm onCreateItem={createTodolist}/>
-        {todolists.map((todolist: any) => (
+        {todolists.map(todolist => (
             <div key={todolist.id} style={container}>
               <div>
                 <EditableSpan value={todolist.title}
@@ -59,4 +76,16 @@ const container: CSSProperties = {
   display: 'flex',
   justifyContent: 'space-between',
   flexDirection: 'column',
+}
+
+type FieldError = {
+  error: string
+  field: string
+}
+
+export type BaseResponse<T = {}> = {
+  data: T
+  fieldsErrors: FieldError[]
+  messages: string[]
+  resultCode: number
 }

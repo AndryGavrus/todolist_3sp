@@ -9,8 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
+import Switch from '@mui/material/Switch'
 import Toolbar from '@mui/material/Toolbar'
-import { MaterialUISwitch } from '../MaterialUISwitch/MaterialUISwitch'
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -34,7 +34,7 @@ export const Header = () => {
               <NavButton>Sign in</NavButton>
               <NavButton>Sign up</NavButton>
               <NavButton background={theme.palette.primary.dark}>Faq</NavButton>
-              <MaterialUISwitch onChange={changeMode}/>
+              <Switch color={'default'} onChange={changeMode} />
             </div>
           </Container>
         </Toolbar>

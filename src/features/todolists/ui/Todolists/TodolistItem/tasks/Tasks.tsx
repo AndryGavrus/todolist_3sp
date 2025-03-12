@@ -1,7 +1,7 @@
-import type {Todolist} from '@/app/App'
 import {useAppSelector} from '@/common/hooks/useAppSelector'
 import {selectTasks} from '@/features/todolists/model/tasks-selectors'
-import {TaskItem} from '@/features/todolists/ui/Todolists/TodolistItem/Tasks/TaskItem/TaskItem'
+import type {Todolist} from '@/features/todolists/model/todolists-reducer'
+import {TaskItem} from './TaskItem/TaskItem'
 import List from '@mui/material/List'
 
 type Props = {
