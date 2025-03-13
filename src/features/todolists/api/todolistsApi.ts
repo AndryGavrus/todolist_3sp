@@ -8,5 +8,11 @@ export const todolistsApi = {
     },
     changeTodolistTitle(id: string, title: string) {
         return instance.put<BaseResponse>(`/todo-lists/${id}`, { title })
-    }
+    },
+    createTodolist(title: string) {
+        // самостоятельно
+    },
+    deleteTodolist(id: string) {
+        // самостоятельно
+    },
 }
