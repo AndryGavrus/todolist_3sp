@@ -1,4 +1,3 @@
-import {instance} from '@/common/instance/instance'
 import {todolistsApi} from '@/features/todolists/api/todolistsApi'
 import type {Todolist} from '@/features/todolists/api/todolistsApi.types'
 import {type ChangeEvent, type CSSProperties, useEffect, useState} from 'react'
@@ -16,14 +15,14 @@ export const AppHttpRequests = () => {
   }, [])
 
   const createTodolist = (title: string) => {
-    instance.post<BaseResponse<{ item: Todolist }>>('/todo-lists', {title}).then((res) => {
+    todolistsApi.createTodolist(title).then((res) => {
       const newTodolist = res.data.data.item
       setTodolists([newTodolist, ...todolists])
     })
   }
 
   const deleteTodolist = (id: string) => {
-    instance.delete<BaseResponse>(`/todo-lists/${id}`).then(() => {
+    todolistsApi.deleteTodolist(id).then(() => {
       setTodolists(todolists.filter(todolist => todolist.id !== id))
     })
   }
@@ -78,14 +77,3 @@ const container: CSSProperties = {
   flexDirection: 'column',
 }
 
-type FieldError = {
-  error: string
-  field: string
-}
-
-export type BaseResponse<T = {}> = {
-  data: T
-  fieldsErrors: FieldError[]
-  messages: string[]
-  resultCode: number
-}

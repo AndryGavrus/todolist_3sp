@@ -1,6 +1,6 @@
 import { instance } from "@/common/instance/instance"
 import { Todolist } from "./todolistsApi.types"
-import { BaseResponse } from "@/app/AppHttpRequests"
+import { BaseResponse } from "@/common/types/types"
 
 export const todolistsApi = {
     getTodolists() {
@@ -10,9 +10,9 @@ export const todolistsApi = {
         return instance.put<BaseResponse>(`/todo-lists/${id}`, { title })
     },
     createTodolist(title: string) {
-        // самостоятельно
+        return instance.post<BaseResponse<{ item: Todolist }>>('/todo-lists', {title})
     },
     deleteTodolist(id: string) {
-        // самостоятельно
+        return instance.delete<BaseResponse>(`/todo-lists/${id}`)
     },
 }
