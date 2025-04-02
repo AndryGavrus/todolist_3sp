@@ -1,5 +1,5 @@
 import { beforeEach, expect, test } from 'vitest'
-import type {Todolist} from '../App'
+import type {Todolist} from '../../App'
 import {
   changeTodolistFilterAC,
   changeTodolistTitleAC,
