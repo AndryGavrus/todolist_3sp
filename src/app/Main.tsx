@@ -1,24 +1,25 @@
-import { useAppDispatch } from "@/common/hooks/useAppDispatch"
-import { CreateItemForm } from "@/CreateItemForm"
-import { Todolists } from "@/features/todolists/ui/Todolists/Todolists"
-import { createTodolistAC } from "@/features/model/todolists-reducer"
-import { Container, Grid } from "@mui/material"
+import {useAppDispatch} from '@/common/hooks/useAppDispatch'
+import {CreateItemForm} from '@/common/components/CreateItemForm/CreateItemForm'
+import {createTodolistAC} from '@/features/todolists/model/todolists-reducer'
+import {Todolists} from '@/features/todolists/ui/Todolists/Todolists'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid2'
 
 export const Main = () => {
+  const dispatch = useAppDispatch()
+
   const createTodolist = (title: string) => {
     dispatch(createTodolistAC(title))
   }
 
-  const dispatch = useAppDispatch()
-
   return (
-    <Container maxWidth={"lg"}>
-      <Grid container sx={{ mb: "30px" }}>
-        <CreateItemForm onCreateItem={createTodolist} />
-      </Grid>
-      <Grid container spacing={4}>
-        <Todolists />
-      </Grid>
-    </Container>
+      <Container maxWidth={'lg'}>
+        <Grid container sx={{mb: '30px'}}>
+          <CreateItemForm onCreateItem={createTodolist}/>
+        </Grid>
+        <Grid container spacing={4}>
+          <Todolists/>
+        </Grid>
+      </Container>
   )
 }
