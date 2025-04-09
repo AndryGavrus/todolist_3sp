@@ -3,10 +3,9 @@ import {
   changeTaskStatusAC, changeTaskTitleAC,
   createTaskAC,
   deleteTaskAC,
-  tasksReducer
+  tasksReducer, type TasksState
 } from '../tasks-reducer'
 import {createTodolistAC, deleteTodolistAC} from '../todolists-reducer'
-import { TasksState } from '../../ui/Todolists/TodolistItem/Tasks/Tasks'
 
 let startState: TasksState = {}
 

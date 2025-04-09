@@ -4,10 +4,9 @@ import {
   changeTodolistFilterAC,
   changeTodolistTitleAC,
   createTodolistAC,
-  deleteTodolistAC,
+  deleteTodolistAC, type Todolist,
   todolistsReducer
 } from '../todolists-reducer'
-import { Todolist } from '../../ui/Todolists/Todolists'
 
 let todolistId1: string
 let todolistId2: string
