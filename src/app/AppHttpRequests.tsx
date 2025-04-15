@@ -1,9 +1,6 @@
 import { type ChangeEvent, type CSSProperties, useEffect, useState } from "react"
 import Checkbox from "@mui/material/Checkbox"
-import axios from "axios"
 import { CreateItemForm, EditableSpan } from "@/common/components"
-import { BaseResponce } from "@/common/types/types"
-import { instance } from "@/common/instance/instance"
 import { Todolist } from "@/features/todolists/api/todolistsApi.types"
 import { todolistApi } from "@/features/todolists/api/todolistsApi"
 
@@ -18,8 +15,7 @@ export const AppHttpRequests = () => {
   }, [])
 
   const createTodolist = (title: string) => {
-    instance
-      .post<BaseResponce<{ item: Todolist }>>("/todo-lists", { title })
+    todolistApi.createTodolist(title)
       .then((res) => {
         const newTodolist = res.data.data.item
         setTodolists([newTodolist, ...todolists])
@@ -27,7 +23,8 @@ export const AppHttpRequests = () => {
   }
 
   const deleteTodolist = (id: string) => {
-    instance.delete<BaseResponce>(`/todo-lists/${id}`).then(() => {
+    todolistApi.deleteTodolist(id)
+    .then(() => {
       setTodolists(todolists.filter((todolist) => todolist.id !== id))
     })
   }
